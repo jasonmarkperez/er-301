@@ -1,4 +1,5 @@
 #include <hal/board.h>
+#include <hal/constants.h>
 #include <hal/log.h>
 #include "daisy_seed.h"
 using namespace daisy;
@@ -13,6 +14,7 @@ void Board_init(void) {
     logInfo("Board_init: Daisy Seed");
     seed.Configure();
     seed.Init();
+    seed.SetAudioBlockSize(MAX_AUDIO_FRAME_LENGTH);
 }
 
 void Board_enableI2C2(void) {}
