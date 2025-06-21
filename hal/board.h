@@ -18,4 +18,8 @@ extern "C"
 
 #ifdef __cplusplus
 }
+
+/* Daisy-specific helper */
+class DaisySeed;
+extern DaisySeed *Board_getDaisySeed();
 #endif

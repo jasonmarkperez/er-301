@@ -1,7 +1,7 @@
 # Makefile shared by the tutorial examples.
 
 # Determine ARCH if it's not provided...
-# linux | darwin | am335x
+# linux | darwin | am335x | daisy
 ifndef ARCH
   SYSTEM_NAME := $(shell uname -s)
   ifeq ($(SYSTEM_NAME),Linux)
@@ -51,6 +51,13 @@ CFLAGS.darwin = -Wno-deprecated-declarations -march=native -fPIC
 LFLAGS = -dynamic -undefined dynamic_lookup -lSystem
 includes += $(SDKPATH)/emu
 include $(SDKPATH)/scripts/darwin.mk
+endif
+
+ifeq ($(ARCH),daisy)
+INSTALLPATH.daisy = $(HOME)/.od/rear
+CFLAGS.daisy = -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard
+LFLAGS = -nostdlib -nodefaultlibs -r
+include $(SDKPATH)/scripts/daisy.mk
 endif
 
 CFLAGS.common = -Wall -ffunction-sections -fdata-sections
