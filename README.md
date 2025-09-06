@@ -227,6 +227,14 @@ A good test of your build environment is to see if you can successfully build th
 make core teletype ARCH=am335x
 ```
 
+To experiment with the experimental Daisy Seed port clone
+[libDaisy](https://github.com/electro-smith/libDaisy) somewhere on your machine
+and set the `LIBDAISY_DIR` environment variable to that path. Then use:
+
+```bash
+make core ARCH=daisy
+```
+
 ### Work through the tutorials
 
 The [tutorial](tutorial) directory contains 3 example projects that progressively increase in complexity and sophistication.  These projects also show how you can work completely outside of this source tree.
@@ -245,11 +253,12 @@ All build outputs are placed in a sub folder composed of the build profile and t
 * debug: No optimizations.  Logging enabled.
 * release: All optimizations enabled.  Logging disabled.
 
-And here are the 3 supported target architectures:
+And here are the supported target architectures:
 
 * am335x
 * linux
 * darwin (macOS)
+* daisy (experimental, requires libDaisy and STM32 toolchain)
 
 So for example, if I execute the following make command:
 

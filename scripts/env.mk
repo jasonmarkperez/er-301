@@ -120,6 +120,29 @@ includes += emu
 CFLAGS.darwin = -Wno-deprecated-declarations -march=native -fPIC
 endif
 
+### daisy-specific
+ifeq ($(ARCH),daisy)
+
+CFLAGS.release ?= $(CFLAGS.speed) -Wno-unused
+CFLAGS.testing ?= -g -DBUILDOPT_TESTING
+CFLAGS.debug ?= -g -DBUILDOPT_TESTING
+
+pkg_install_dir = $(HOME)/.od/rear
+
+include scripts/daisy.mk
+
+CFLAGS.daisy = -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard
+
+# location of libDaisy and default search paths
+LIBDAISY_DIR ?= $(HOME)/libDaisy
+includes += $(LIBDAISY_DIR)/Core/Inc \
+           $(LIBDAISY_DIR)/Drivers/CMSIS/Include \
+           $(LIBDAISY_DIR)/Drivers/CMSIS/Device/ST/STM32H7xx/Include \
+           $(LIBDAISY_DIR)/Drivers/STM32H7xx_HAL_Driver/Inc
+libraries += $(LIBDAISY_DIR)/build/libDaisy.a
+
+endif
+
 ###########################
 
 ifndef CFLAGS.$(PROFILE)
